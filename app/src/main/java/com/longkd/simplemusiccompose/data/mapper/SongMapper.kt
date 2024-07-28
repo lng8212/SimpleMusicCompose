@@ -1,5 +1,6 @@
 package com.longkd.simplemusiccompose.data.mapper
 
+import androidx.media3.common.MediaItem
 import com.longkd.simplemusiccompose.data.db.model.SongDto
 import com.longkd.simplemusiccompose.domain.model.Song
 
@@ -15,4 +16,13 @@ fun SongDto.toSong() =
         subtitle = subtitle,
         songUrl = songUrl,
         imageUrl = imageUrl
+    )
+
+fun MediaItem.toSong() =
+    Song(
+        mediaId = mediaId,
+        title = mediaMetadata.title.toString(),
+        subtitle = mediaMetadata.subtitle.toString(),
+        songUrl = mediaId,
+        imageUrl = mediaMetadata.artworkUri.toString()
     )

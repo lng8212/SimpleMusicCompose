@@ -78,4 +78,16 @@ dependencies {
 
     implementation(libs.bundles.hilt)
     kapt(libs.bundles.hilt.kapt)
+
+    // Lifecycle
+    implementation(libs.lifecycle.extensions)
+    implementation(libs.bundles.lifecycle)
+
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    implementation(libs.coil.compose)
+
+    implementation(libs.media3.ui)
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.session)
 }

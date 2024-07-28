@@ -1,10 +1,12 @@
 [versions]
 agp = "8.5.1"
+coilCompose = "2.6.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+lifecycleRuntimeCompose = "2.8.4"
 lifecycleRuntimeKtx = "2.8.3"
 activityCompose = "1.9.0"
 composeBom = "2024.04.01"
@@ -14,10 +16,15 @@ google-services = "4.4.0"
 hilt = "2.48"
 hilt-compiler = "1.1.0"
 hilt-navigation-compose = "1.1.0"
+lifecycle = "2.6.2"
+lifecycle-extensions = "2.2.0"
+media3 = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -43,7 +50,13 @@ hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-p
 hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-compiler" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle-extensions" }
 
+media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
+media3-session = { module = "androidx.media3:media3-session", version.ref = "media3" }
+media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -61,4 +74,8 @@ hilt = [
 hilt-kapt = [
     "hilt-android-compiler",
     "hilt-compiler",
+]
+lifecycle = [
+    "lifecycle-viewmodel",
+    "lifecycle-viewmodel-compose"
 ]
