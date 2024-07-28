@@ -19,6 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "SimpleMusicCompose"
 include(":app")
  
