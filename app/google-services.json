@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "38769143995",
+    "project_id": "music-compose",
+    "storage_bucket": "music-compose.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38769143995:android:86e2b67bf1eaa9974c799e",
+        "android_client_info": {
+          "package_name": "com.longkd.simplemusiccompose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZZkeAyR9gsgBsjIb3efHapAqYxmpC4fY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
