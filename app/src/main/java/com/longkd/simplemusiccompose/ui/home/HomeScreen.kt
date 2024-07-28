@@ -1,10 +1,13 @@
 package com.longkd.simplemusiccompose.ui.home
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.longkd.simplemusiccompose.ui.home.component.HomeLoadingView
+import com.longkd.simplemusiccompose.ui.home.component.SongsView
 
 /**
  * @Author: longkd
@@ -12,6 +15,27 @@ import androidx.compose.ui.text.style.TextAlign
  */
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-    Text(modifier = Modifier.fillMaxSize(), text = "Home", textAlign = TextAlign.Center)
+internal fun HomeRoute(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel()) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onEvent(HomeEvent.FetchSong)
+    }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    HomeScreen(uiState = uiState)
+}
+
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier, uiState: HomeUiState) {
+    when (uiState) {
+        is HomeUiState.Loading -> {
+            HomeLoadingView()
+        }
+
+        is HomeUiState.Error -> {
+            //TODO Show Error
+        }
+
+        is HomeUiState.Success -> {
+            SongsView(listSong = uiState.listSongs)
+        }
+    }
 }

@@ -20,11 +20,8 @@ class MusicRepositoryImpl(private val musicRemoteDatabase: MusicRemoteDatabase) 
     override fun getSong(): Flow<Resource<List<Song>>> {
         return flow {
             val songs = musicRemoteDatabase.getAllSong().await().toObjects<SongDto>()
-            if (songs.isNotEmpty()) {
-                emit(Resource.Success(songs.map {
-                    it.toSong()
-                }))
-            }
+            if (songs.isNotEmpty()) emit(Resource.Success(songs.map { it.toSong() }))
+            else emit(Resource.Error(message = "Empty"))
         }
     }
 }
