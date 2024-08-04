@@ -8,8 +8,9 @@ import com.longkd.simplemusiccompose.domain.model.Song
  * @Since: 22:22 - 28/7/24
  */
 @Stable
-sealed interface HomeUiState {
-    data object Loading : HomeUiState
-    data class Error(val error: String) : HomeUiState
-    data class Success(val listSongs: List<Song>) : HomeUiState
-}
+data class HomeUiState(
+    val loading: Boolean? = false,
+    val songs: List<Song>? = emptyList(),
+    val selectedSong: Song? = null,
+    val errorMessage: String? = null,
+)

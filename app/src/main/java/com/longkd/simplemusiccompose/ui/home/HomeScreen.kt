@@ -2,10 +2,8 @@ package com.longkd.simplemusiccompose.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.longkd.simplemusiccompose.ui.home.component.HomeLoadingView
 import com.longkd.simplemusiccompose.ui.home.component.SongsView
 
@@ -19,23 +17,28 @@ internal fun HomeRoute(modifier: Modifier = Modifier, viewModel: HomeViewModel =
     LaunchedEffect(key1 = Unit) {
         viewModel.onEvent(HomeEvent.FetchSong)
     }
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    HomeScreen(uiState = uiState)
+    val uiState = viewModel.uiState
+
+    HomeScreen(uiState = uiState) {
+        viewModel.onEvent(it)
+    }
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, uiState: HomeUiState) {
-    when (uiState) {
-        is HomeUiState.Loading -> {
-            HomeLoadingView()
+fun HomeScreen(modifier: Modifier = Modifier, uiState: HomeUiState, onEvent: (HomeEvent) -> Unit) {
+    with(uiState) {
+        when {
+            loading == true -> {
+                HomeLoadingView()
+            }
+
+            errorMessage == null && songs != null -> {
+                SongsView(listSong = songs) {
+                    onEvent.invoke(HomeEvent.OnSongSelected(it))
+                    onEvent.invoke(HomeEvent.PlaySong)
+                }
+            }
         }
 
-        is HomeUiState.Error -> {
-            //TODO Show Error
-        }
-
-        is HomeUiState.Success -> {
-            SongsView(listSong = uiState.listSongs)
-        }
     }
 }

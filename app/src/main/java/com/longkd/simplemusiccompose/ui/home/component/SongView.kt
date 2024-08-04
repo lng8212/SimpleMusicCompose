@@ -13,13 +13,15 @@ import com.longkd.simplemusiccompose.domain.model.Song
  * @Since: 23:26 - 28/7/24
  */
 @Composable
-fun SongsView(listSong: List<Song>) {
+fun SongsView(listSong: List<Song>, onClickItem: (Song) -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn {
             items(listSong, key = {
                 it.mediaId
             }) { song ->
-                SongItem(item = song)
+                SongItem(item = song) {
+                    onClickItem.invoke(song)
+                }
             }
         }
     }
