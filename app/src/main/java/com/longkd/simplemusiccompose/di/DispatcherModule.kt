@@ -17,11 +17,12 @@ import kotlin.annotation.AnnotationRetention.RUNTIME
 
 @Qualifier
 @Retention(RUNTIME)
-annotation class Dispatcher(val niaDispatcher: MusicDispatcher)
+annotation class Dispatcher(val musicDispatcher: MusicDispatcher)
 
 enum class MusicDispatcher {
     Default,
     IO,
+    Main
 }
 
 
@@ -35,4 +36,8 @@ object DispatchersModule {
     @Provides
     @Dispatcher(MusicDispatcher.Default)
     fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+
+    @Provides
+    @Dispatcher(MusicDispatcher.Main)
+    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 }

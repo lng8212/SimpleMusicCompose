@@ -1,5 +1,6 @@
 package com.longkd.simplemusiccompose.ui.home.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,11 +22,14 @@ import com.longkd.simplemusiccompose.domain.model.Song
  * @Since: 23:26 - 28/7/24
  */
 @Composable
-fun SongItem(item: Song) {
+fun SongItem(item: Song, onClickItem: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .clickable {
+                onClickItem.invoke()
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
