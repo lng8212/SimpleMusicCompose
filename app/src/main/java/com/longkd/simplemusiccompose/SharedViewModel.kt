@@ -12,8 +12,8 @@ import com.longkd.simplemusiccompose.domain.usecase.ResumeSongUseCase
 import com.longkd.simplemusiccompose.domain.usecase.SetMediaControllerCallbackUseCase
 import com.longkd.simplemusiccompose.domain.usecase.SkipToNextSongUseCase
 import com.longkd.simplemusiccompose.domain.usecase.SkipToPreviousSongUseCase
-import com.longkd.simplemusiccompose.ui.bottom_bar.NowPlayingBottomBarUiEvent
-import com.longkd.simplemusiccompose.ui.bottom_bar.NowPlayingBottomBarUiState
+import com.longkd.simplemusiccompose.ui.music_bottom_bar.NowPlayingBottomBarUiEvent
+import com.longkd.simplemusiccompose.ui.music_bottom_bar.NowPlayingBottomBarUiState
 import com.longkd.simplemusiccompose.util.PlayerState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
