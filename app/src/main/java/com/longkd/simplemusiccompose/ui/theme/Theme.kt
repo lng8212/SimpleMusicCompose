@@ -51,7 +51,7 @@ fun SimpleMusicComposeTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = OpenSanTypography,
         content = content
     )
 }
