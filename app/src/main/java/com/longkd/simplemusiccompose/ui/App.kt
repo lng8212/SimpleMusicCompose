@@ -17,9 +17,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.longkd.simplemusiccompose.SharedViewModel
-import com.longkd.simplemusiccompose.ui.bottom_bar.AnimatedNowPlayingBottomBar
 import com.longkd.simplemusiccompose.ui.home.HOME_ROUTE
 import com.longkd.simplemusiccompose.ui.home.homeScreen
+import com.longkd.simplemusiccompose.ui.music_bottom_bar.AnimatedNowPlayingBottomBar
 import com.longkd.simplemusiccompose.ui.player.PLAYER_ROUTE
 import com.longkd.simplemusiccompose.ui.player.playerScreen
 import com.longkd.simplemusiccompose.ui.profile.profileScreen

@@ -1,4 +1,4 @@
-package com.longkd.simplemusiccompose.ui.bottom_bar
+package com.longkd.simplemusiccompose.ui.music_bottom_bar
 
 /**
  * @Author: longkd
