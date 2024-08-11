@@ -1,11 +1,8 @@
 package com.longkd.simplemusiccompose.ui.player
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.longkd.simplemusiccompose.ui.player.component.PlayerBody
 
 /**
  * @Author: longkd
@@ -13,12 +10,24 @@ import androidx.compose.ui.graphics.Color
  */
 
 @Composable
-fun PlayerScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black)
-    ) {
+internal fun PlayerRoute(playerUiState: PlayerUiState, onNavigateUp: () -> Unit) {
+    val viewModel: PlayerViewModel = hiltViewModel()
+    PlayerScreen(playerUiState, onNavigateUp) {
+        viewModel.onEvent(it)
+    }
+}
 
+@Composable
+private fun PlayerScreen(
+    playerUiState: PlayerUiState,
+    onNavigateUp: () -> Unit,
+    onEvent: (PlayerEvent) -> Unit,
+) {
+    if (playerUiState.currentSong != null) {
+        PlayerBody(
+            playerUiState = playerUiState,
+            onNavigateUp = onNavigateUp,
+            onEvent = onEvent
+        )
     }
 }

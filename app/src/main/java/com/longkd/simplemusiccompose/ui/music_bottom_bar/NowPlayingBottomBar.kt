@@ -52,6 +52,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.longkd.simplemusiccompose.R
 import com.longkd.simplemusiccompose.domain.model.Song
+import com.longkd.simplemusiccompose.ui.player.PlayerUiState
 import com.longkd.simplemusiccompose.util.FadeTransition
 import com.longkd.simplemusiccompose.util.PlayerState
 import com.longkd.simplemusiccompose.util.TransitionDurations
@@ -65,8 +66,9 @@ import kotlin.math.absoluteValue
 
 @Composable
 fun AnimatedNowPlayingBottomBar(
-    musicControllerUiState: NowPlayingBottomBarUiState,
+    musicControllerUiState: PlayerUiState,
     onEvent: (NowPlayingBottomBarUiEvent) -> Unit,
+    onBarClick: () -> Unit,
 ) {
     val visible = remember {
         MutableTransitionState(false).apply {
@@ -82,7 +84,7 @@ fun AnimatedNowPlayingBottomBar(
         ) + fadeIn(animationSpec = nowPlayingBottomBarEnterAnimationSpec()),
         exit = fadeOut()
     ) {
-        NowPlayingBottomBar(musicControllerUiState, onEvent = onEvent)
+        NowPlayingBottomBar(musicControllerUiState, onEvent = onEvent, onBarClick = onBarClick)
     }
 }
 
@@ -92,8 +94,9 @@ private fun <T> nowPlayingBottomBarEnterAnimationSpec() = TransitionDurations.No
 
 @Composable
 fun NowPlayingBottomBar(
-    musicControllerUiState: NowPlayingBottomBarUiState,
+    musicControllerUiState: PlayerUiState,
     onEvent: (NowPlayingBottomBarUiEvent) -> Unit,
+    onBarClick: () -> Unit,
 ) {
     AnimatedContent(
         modifier = Modifier.fillMaxWidth(),
@@ -131,12 +134,12 @@ fun NowPlayingBottomBar(
                     .wrapContentHeight()
                     .swipeable(
                         onSwipeUp = {
-                            onEvent.invoke(NowPlayingBottomBarUiEvent.OnClickBottomBarUi)
+                            onBarClick.invoke()
                         }
                     ),
                     shape = RectangleShape,
                     onClick = {
-                        onEvent.invoke(NowPlayingBottomBarUiEvent.OnClickBottomBarUi)
+                        onBarClick.invoke()
                     }
                 ) {
                     Row(

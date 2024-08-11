@@ -18,12 +18,12 @@ const val PLAYER_ROUTE = "player_route"
 fun NavController.navigateToPlayer(navOptions: NavOptions? = null) =
     navigate(route = PLAYER_ROUTE, navOptions = navOptions)
 
-fun NavGraphBuilder.playerScreen() {
+fun NavGraphBuilder.playerScreen(playerUiState: PlayerUiState, onNavigateUp: () -> Unit) {
     composable(route = PLAYER_ROUTE,
         enterTransition = { SlideTransition.slideUp.enterTransition() },
         exitTransition = { FadeTransition.exitTransition() },
         popEnterTransition = { FadeTransition.enterTransition() },
         popExitTransition = { SlideTransition.slideDown.exitTransition() }) {
-        PlayerScreen()
+        PlayerRoute(playerUiState, onNavigateUp)
     }
 }

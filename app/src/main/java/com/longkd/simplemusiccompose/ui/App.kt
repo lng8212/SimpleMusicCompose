@@ -21,6 +21,7 @@ import com.longkd.simplemusiccompose.ui.home.HOME_ROUTE
 import com.longkd.simplemusiccompose.ui.home.homeScreen
 import com.longkd.simplemusiccompose.ui.music_bottom_bar.AnimatedNowPlayingBottomBar
 import com.longkd.simplemusiccompose.ui.player.PLAYER_ROUTE
+import com.longkd.simplemusiccompose.ui.player.navigateToPlayer
 import com.longkd.simplemusiccompose.ui.player.playerScreen
 import com.longkd.simplemusiccompose.ui.profile.profileScreen
 import com.longkd.simplemusiccompose.ui.search.searchScreen
@@ -36,7 +37,7 @@ fun App(sharedViewModel: SharedViewModel) {
         mutableIntStateOf(0)
     }
     val navController = rememberNavController()
-    val musicControllerUiState = sharedViewModel.nowPlayingBottomBarUiState
+    val musicControllerUiState = sharedViewModel.playerUiState
     var showBottomBar by rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     showBottomBar = navBackStackEntry?.destination?.route != PLAYER_ROUTE
@@ -45,9 +46,13 @@ fun App(sharedViewModel: SharedViewModel) {
         bottomBar = {
             if (showBottomBar) {
                 Column {
-                    AnimatedNowPlayingBottomBar(musicControllerUiState = musicControllerUiState) {
-                        sharedViewModel.onEvent(it)
-                    }
+                    AnimatedNowPlayingBottomBar(musicControllerUiState = musicControllerUiState,
+                        onEvent = {
+                            sharedViewModel.onEvent(it)
+                        },
+                        onBarClick = {
+                            navController.navigateToPlayer()
+                        })
 //                    NavigationBar {
 //                        BottomNavigationItem().bottomNavigationItems()
 //                            .forEachIndexed { index, item ->
@@ -81,10 +86,14 @@ fun App(sharedViewModel: SharedViewModel) {
         Box(modifier = Modifier.padding(contentPadding)) {
             NavHost(navController = navController, HOME_ROUTE) {
                 homeScreen()
-                playerScreen()
+                playerScreen(
+                    playerUiState = musicControllerUiState,
+                    onNavigateUp = {
+                        navController.navigateUp()
+                    }
+                )
                 profileScreen()
                 searchScreen()
-                playerScreen()
             }
         }
     }

@@ -13,7 +13,7 @@ import com.longkd.simplemusiccompose.domain.usecase.SetMediaControllerCallbackUs
 import com.longkd.simplemusiccompose.domain.usecase.SkipToNextSongUseCase
 import com.longkd.simplemusiccompose.domain.usecase.SkipToPreviousSongUseCase
 import com.longkd.simplemusiccompose.ui.music_bottom_bar.NowPlayingBottomBarUiEvent
-import com.longkd.simplemusiccompose.ui.music_bottom_bar.NowPlayingBottomBarUiState
+import com.longkd.simplemusiccompose.ui.player.PlayerUiState
 import com.longkd.simplemusiccompose.util.PlayerState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -35,7 +35,7 @@ class SharedViewModel @Inject constructor(
     private val skipToPreviousSongUseCase: SkipToPreviousSongUseCase,
     private val skipToNextSongUseCase: SkipToNextSongUseCase,
 ) : ViewModel() {
-    var nowPlayingBottomBarUiState by mutableStateOf(NowPlayingBottomBarUiState())
+    var playerUiState by mutableStateOf(PlayerUiState())
         private set
 
     init {
@@ -44,12 +44,8 @@ class SharedViewModel @Inject constructor(
 
     fun onEvent(nowPlayingBottomBarUiEvent: NowPlayingBottomBarUiEvent) {
         when (nowPlayingBottomBarUiEvent) {
-            NowPlayingBottomBarUiEvent.OnClickBottomBarUi -> {
-
-            }
-
             NowPlayingBottomBarUiEvent.OnPlayPauseMusic -> {
-                if (nowPlayingBottomBarUiState.playerState == PlayerState.PLAYING) {
+                if (playerUiState.playerState == PlayerState.PLAYING) {
                     pauseSongUseCase.invoke()
                 } else resumeSongUseCase.invoke()
             }
@@ -66,7 +62,7 @@ class SharedViewModel @Inject constructor(
 
     private fun setMediaControllerCallback() {
         setMediaControllerCallbackUseCase { playerState, currentMusic, currentPosition, totalDuration, isShuffleEnabled, iRepeatOneEnabled ->
-            nowPlayingBottomBarUiState = nowPlayingBottomBarUiState.copy(
+            playerUiState = playerUiState.copy(
                 playerState = playerState,
                 currentSong = currentMusic,
                 currentPosition = currentPosition,
@@ -78,7 +74,7 @@ class SharedViewModel @Inject constructor(
                 viewModelScope.launch {
                     while (true) {
                         delay(3.seconds)
-                        nowPlayingBottomBarUiState = nowPlayingBottomBarUiState.copy(
+                        playerUiState = playerUiState.copy(
                             currentPosition = getCurrentSongPositionUseCase()
                         )
                     }
