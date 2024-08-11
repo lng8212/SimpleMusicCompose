@@ -24,7 +24,7 @@ internal fun HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun HomeScreen(uiState: HomeUiState, onEvent: (HomeEvent) -> Unit) {
+private fun HomeScreen(uiState: HomeUiState, onEvent: (HomeEvent) -> Unit) {
     with(uiState) {
         when {
             loading == true -> {

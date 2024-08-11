@@ -1,4 +1,4 @@
-package com.longkd.simplemusiccompose.ui.music_bottom_bar
+package com.longkd.simplemusiccompose.ui.player
 
 import androidx.compose.runtime.Stable
 import com.longkd.simplemusiccompose.domain.model.Song
@@ -10,7 +10,7 @@ import com.longkd.simplemusiccompose.util.PlayerState
  */
 
 @Stable
-data class NowPlayingBottomBarUiState(
+data class PlayerUiState(
     val playerState: PlayerState? = null,
     val currentSong: Song? = null,
     val currentPosition: Long = 0L,
