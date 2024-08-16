@@ -1,6 +1,5 @@
 package com.longkd.simplemusiccompose.data.service
 
-import android.util.Log
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaSession
@@ -47,7 +46,6 @@ class MusicService : MediaSessionService() {
             controller: MediaSession.ControllerInfo,
             mediaItems: MutableList<MediaItem>,
         ): ListenableFuture<MutableList<MediaItem>> {
-            Log.e("xxxxx", "onAddMediaItems: ")
             val updatedMediaItem = mediaItems.map {
                 it.buildUpon().setUri(it.mediaId).build()
             }.toMutableList()
