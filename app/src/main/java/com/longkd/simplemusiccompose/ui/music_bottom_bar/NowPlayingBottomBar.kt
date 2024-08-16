@@ -2,7 +2,6 @@ package com.longkd.simplemusiccompose.ui.music_bottom_bar
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
@@ -70,14 +69,9 @@ fun AnimatedNowPlayingBottomBar(
     onEvent: (NowPlayingBottomBarUiEvent) -> Unit,
     onBarClick: () -> Unit,
 ) {
-    val visible = remember {
-        MutableTransitionState(false).apply {
-            targetState = true
-        }
-    }
 
     AnimatedVisibility(
-        visibleState = visible,
+        visible = musicControllerUiState.playerState != PlayerState.STOPPED,
         enter = slideInVertically(
             animationSpec = nowPlayingBottomBarEnterAnimationSpec(),
             initialOffsetY = { it / 2 }
