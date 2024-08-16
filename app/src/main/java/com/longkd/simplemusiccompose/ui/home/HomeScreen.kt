@@ -2,6 +2,8 @@ package com.longkd.simplemusiccompose.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.longkd.simplemusiccompose.ui.home.component.HomeLoadingView
 import com.longkd.simplemusiccompose.ui.home.component.SongsView
@@ -13,11 +15,15 @@ import com.longkd.simplemusiccompose.ui.home.component.SongsView
 
 @Composable
 internal fun HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(HomeEvent.FetchSong)
+    val isInitialized = rememberSaveable { mutableStateOf(false) }
+    if (!isInitialized.value) {
+        LaunchedEffect(key1 = Unit) {
+            viewModel.onEvent(HomeEvent.FetchSong)
+            isInitialized.value = true
+        }
     }
-    val uiState = viewModel.uiState
 
+    val uiState = viewModel.uiState
     HomeScreen(uiState = uiState) {
         viewModel.onEvent(it)
     }
