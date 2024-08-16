@@ -1,13 +1,11 @@
 package com.longkd.simplemusiccompose
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.longkd.simplemusiccompose.ui.home.HOME_ROUTE
-import com.longkd.simplemusiccompose.ui.profile.PROFILE_ROUTE
-import com.longkd.simplemusiccompose.ui.search.SEARCH_ROUTE
+import com.longkd.simplemusiccompose.ui.setting.SETTING_ROUTE
 
 /**
  * @Author: longkd
@@ -22,7 +20,6 @@ data class BottomNavigationItem(
 ) {
     fun bottomNavigationItems(): List<BottomNavigationItem> = listOf(
         BottomNavigationItem(label = "Home", icon = Icons.Filled.Home, HOME_ROUTE),
-        BottomNavigationItem(label = "Search", icon = Icons.Filled.Search, SEARCH_ROUTE),
-        BottomNavigationItem(label = "Profile", icon = Icons.Filled.AccountCircle, PROFILE_ROUTE)
+        BottomNavigationItem(label = "Setting", icon = Icons.Filled.Settings, SETTING_ROUTE)
     )
 }
